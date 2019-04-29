@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "830340272283-cukeepf84qet40sbur7bqgsu1lroo2sf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.swimmingtraining",
+            "certificate_hash": "2ae6ad1f44ae3123eb943fed2f09ea80e8718291"
+          }
+        },
+        {
           "client_id": "830340272283-qqtvhir24v15cqibnknfq9hac7ps8q9c.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830340272283-qqtvhir24v15cqibnknfq9hac7ps8q9c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
