@@ -37,34 +37,8 @@ public class Login extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email1 = email.getText().toString();
-                String password1 = password.getText().toString();
-
-                if(TextUtils.isEmpty(email1)){
-                    Toast.makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(TextUtils.isEmpty(password1)){
-                    Toast.makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля",Toast.LENGTH_SHORT).show();
-                }
-
-                if(password1.length()<6){
-                    Toast.makeText(getApplicationContext(),"Пароль должен содержать не менее 6 символов",Toast.LENGTH_SHORT).show();
-                }
-
-                firebaseAuth.createUserWithEmailAndPassword(email1,password1)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    startActivity(new Intent(getApplicationContext(),Main_trainer.class));
-                                    finish();
-                                }
-                                else{
-                                    Toast.makeText(getApplicationContext(),"Данный E-mail уже зарегистрирован",Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                Intent intent = new Intent(Login.this, Registration.class);
+                startActivity(intent);
             }
         });
         loginButton.setOnClickListener(new View.OnClickListener() {

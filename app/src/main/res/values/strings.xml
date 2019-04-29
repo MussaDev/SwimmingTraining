@@ -15,8 +15,13 @@
     <string name="last_name_author">Шабатуков</string>
     <string name="seach_vk">vk.com/sh_mussa</string>
     <string name="sign_out">Выйти</string>
-
+    <string-array name="position">
+        <item>никто</item>
+        <item>Спортсмен</item>
+        <item>Тренер</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_registration">Registration</string>
 </resources>
