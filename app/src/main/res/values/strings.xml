@@ -10,10 +10,11 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Настойки</string>
     <string name="first_name_autor">Мустафа</string>
     <string name="last_name_author">Шабатуков</string>
     <string name="seach_vk">vk.com/sh_mussa</string>
+    <string name="sign_out">Выйти</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

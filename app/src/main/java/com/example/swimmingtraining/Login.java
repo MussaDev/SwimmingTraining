@@ -29,8 +29,8 @@ public class Login extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.login);
         password = (EditText) findViewById(R.id.password);
-        registerButton = (Button) findViewById(R.id.vhod);
-        loginButton = (Button) findViewById(R.id.reg);
+        registerButton = (Button) findViewById(R.id.reg);
+        loginButton = (Button) findViewById(R.id.vhod);
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
 
