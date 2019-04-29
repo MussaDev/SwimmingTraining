@@ -2,7 +2,8 @@
     <string name="app_name">SwimmingTraining</string>
     <string name="login">Логин</string>
     <string name="passspord">Пароль</string>
-    <string name="log_in">Перейти</string>
+    <string name="log_in">Войти</string>
+    <string name="log_up">Зарегистрироваться</string>
     <string name="title_activity_main_trainer">Main_trainer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
