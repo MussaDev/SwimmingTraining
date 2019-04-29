@@ -1,39 +1,37 @@
 {
   "project_info": {
-    "project_number": "830340272283",
-    "firebase_url": "https://swimmingtraining-51cd8.firebaseio.com",
-    "project_id": "swimmingtraining-51cd8",
-    "storage_bucket": "swimmingtraining-51cd8.appspot.com"
+    "project_number": "344915476857",
+    "firebase_url": "https://swimmingtraining-e7688.firebaseio.com",
+    "project_id": "swimmingtraining-e7688",
+    "storage_bucket": "swimmingtraining-e7688.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:830340272283:android:cc78c895328ad1de",
+        "mobilesdk_app_id": "1:344915476857:android:cc78c895328ad1de",
         "android_client_info": {
           "package_name": "com.example.swimmingtraining"
         }
       },
       "oauth_client": [
         {
-          "client_id": "830340272283-qqtvhir24v15cqibnknfq9hac7ps8q9c.apps.googleusercontent.com",
+          "client_id": "344915476857-7umd0topc4jtn02s769tbpm3ihgl01a5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDlJBttpocn4mkSmYyI7L2QcHnkwL9agrw"
+          "current_key": "AIzaSyDHc6GXq9hlDa4fID3vcIf7xOtDEupfCPs"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344915476857-7umd0topc4jtn02s769tbpm3ihgl01a5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
