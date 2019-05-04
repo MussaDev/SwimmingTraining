@@ -1,5 +1,6 @@
 package com.example.swimmingtraining;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -48,10 +49,12 @@ public class Login extends AppCompatActivity {
                 String password1 = password.getText().toString();
 
                 if(TextUtils.isEmpty(email1)){
+                    email.getBackground().mutate().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
                     Toast.makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(TextUtils.isEmpty(password1)){
+                    password.getBackground().mutate().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
                     Toast.makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля",Toast.LENGTH_SHORT).show();
                 }
 
@@ -64,6 +67,8 @@ public class Login extends AppCompatActivity {
                                     finish();
                                 }
                                 else{
+                                    email.getBackground().mutate().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
+                                    password.getBackground().mutate().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
                                     Toast.makeText(getApplicationContext(),"E-mail или пароль не правильны",Toast.LENGTH_SHORT).show();
                                 }
                             }

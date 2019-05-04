@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "344915476857-mgeh1uoflvi9575nolb39ie3ehl2ni3k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.swimmingtraining",
+            "certificate_hash": "2ae6ad1f44ae3123eb943fed2f09ea80e8718291"
+          }
+        },
+        {
           "client_id": "344915476857-7umd0topc4jtn02s769tbpm3ihgl01a5.apps.googleusercontent.com",
           "client_type": 3
         }

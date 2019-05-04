@@ -18,9 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Registration extends AppCompatActivity {
-    EditText email,password;
+    EditText email,password,familia;
     Button registerButton,loginButton;
     FirebaseAuth firebaseAuth;
     @Override
@@ -29,8 +31,11 @@ public class Registration extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.passw);
+        familia = (EditText) findViewById(R.id.familia);
         registerButton = (Button) findViewById(R.id.reg);
         loginButton = (Button) findViewById(R.id.vhod);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
     }
@@ -38,10 +43,17 @@ public class Registration extends AppCompatActivity {
     public void reg(View view) {
         String email1 = email.getText().toString();
         String password1 = password.getText().toString();
+        String famalia1 = familia.getText().toString();
 
         if(TextUtils.isEmpty(email1)){
             Toast.makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля",Toast.LENGTH_SHORT).show();
             return;
+        }
+        if(TextUtils.isEmpty(password1)){
+            Toast.makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля",Toast.LENGTH_SHORT).show();
+        }
+        if(TextUtils.isEmpty(famalia1)){
+            Toast.makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля",Toast.LENGTH_SHORT).show();
         }
         if(TextUtils.isEmpty(password1)){
             Toast.makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля",Toast.LENGTH_SHORT).show();
