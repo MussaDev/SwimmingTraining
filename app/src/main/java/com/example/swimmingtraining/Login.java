@@ -34,6 +34,8 @@ public class Login extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.vhod);
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
+        email.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+        password.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
