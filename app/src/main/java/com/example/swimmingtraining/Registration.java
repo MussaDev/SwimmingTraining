@@ -20,13 +20,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class Registration extends AppCompatActivity {
+public class Registration extends AppCompatActivity implements ValueEventListener{
     EditText email,password,familia,name,otchestvo,dr;
     Button registerButton,loginButton;
     FirebaseAuth firebaseAuth;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference bfamilia = database.getReference("familia");
+    DatabaseReference bname = database.getReference("name");
+    DatabaseReference botchestvo = database.getReference("otchestvo");
+    DatabaseReference bemail = database.getReference("email");
+    DatabaseReference bdr = database.getReference("dr");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,14 +50,13 @@ public class Registration extends AppCompatActivity {
 
         registerButton = (Button) findViewById(R.id.reg);
         loginButton = (Button) findViewById(R.id.vhod);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
     public void reg(View view) {
-        String famalia1 = familia.getText().toString();
+        String familia1 = familia.getText().toString();
         String name1 = name.getText().toString();
         String otchestvo1  = otchestvo.getText().toString();
         String email1 = email.getText().toString();
@@ -62,7 +70,7 @@ public class Registration extends AppCompatActivity {
         dr.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
 
 
-        if(TextUtils.isEmpty(famalia1)){
+        if(TextUtils.isEmpty(familia1)){
             familia.getBackground().mutate().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
             Toast.makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля",Toast.LENGTH_SHORT).show();
             return;
@@ -93,6 +101,17 @@ public class Registration extends AppCompatActivity {
             return;
         }
 
+        DatabaseReference sfamilia = bfamilia.child("familia1");
+        sfamilia.setValue(familia1);
+        DatabaseReference sname = bname.child("name1");
+        sname.setValue(name1);
+        DatabaseReference sotchestvo = botchestvo .child("otchestvo 1");
+        sotchestvo.setValue(otchestvo1);
+        DatabaseReference semail = bemail.child("email1");
+        semail.setValue(email1);
+        DatabaseReference sdr = bdr.child("dr1");
+        sdr.setValue(dr1);
+
         firebaseAuth.createUserWithEmailAndPassword(email1,password1)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -106,5 +125,20 @@ public class Registration extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 }
