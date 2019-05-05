@@ -31,11 +31,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
     Button registerButton,loginButton;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference bfamilia = database.getReference("familia");
-    DatabaseReference bname = database.getReference("name");
-    DatabaseReference botchestvo = database.getReference("otchestvo");
-    DatabaseReference bemail = database.getReference("email");
-    DatabaseReference bdr = database.getReference("dr");
+    DatabaseReference user = database.getReference("users");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +49,11 @@ public class Registration extends AppCompatActivity implements ValueEventListene
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
+
     }
 
     public void reg(View view) {
+
         String familia1 = familia.getText().toString();
         String name1 = name.getText().toString();
         String otchestvo1  = otchestvo.getText().toString();
@@ -100,15 +98,19 @@ public class Registration extends AppCompatActivity implements ValueEventListene
             Toast.makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля",Toast.LENGTH_SHORT).show();
             return;
         }
-
+        DatabaseReference bfamilia = user.child("familia");
         DatabaseReference sfamilia = bfamilia.child("familia1");
         sfamilia.setValue(familia1);
+        DatabaseReference bname = user.child("name");
         DatabaseReference sname = bname.child("name1");
         sname.setValue(name1);
+        DatabaseReference botchestvo = user.child("otchestvo");
         DatabaseReference sotchestvo = botchestvo .child("otchestvo 1");
         sotchestvo.setValue(otchestvo1);
+        DatabaseReference bemail = user.child("email");
         DatabaseReference semail = bemail.child("email1");
         semail.setValue(email1);
+        DatabaseReference bdr = user.child("dr");
         DatabaseReference sdr = bdr.child("dr1");
         sdr.setValue(dr1);
 

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,12 +15,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 
 public class Main_trainer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    EditText email,password,familia,name,otchestvo,dr;
+    Button registerButton,loginButton;
+    FirebaseAuth firebaseAuth;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference user = database.getReference("users");
+    DatabaseReference bname = database.getReference("name");
+    DatabaseReference botchestvo = database.getReference("otchestvo");
+    DatabaseReference bemail = database.getReference("email");
+    DatabaseReference bdr = database.getReference("dr");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,17 +63,25 @@ public class Main_trainer extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        DatabaseReference familia = user.child("familia");
+        familia.addValueEventListener(new ValueEventListener() {
+            @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                NavigationView nv = (NavigationView) findViewById(R.id.nav_view);;
+                View header = nv.getHeaderView(0);
+                TextView tv = (TextView)header.findViewById(R.id.name1);
+                String value = dataSnapshot.child("familia1").getValue(String.class);
+                tv.setText(value);
+                }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("Failed to read value.", error.toException());
+            }
+        });
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
