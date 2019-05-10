@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,11 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,15 +27,9 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Main_trainer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    EditText email,password,familia,name,otchestvo,dr;
-    Button registerButton,loginButton;
-    FirebaseAuth firebaseAuth;
+    //Объявление элементов GUI
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference user = database.getReference("users");
-    DatabaseReference bname = database.getReference("name");
-    DatabaseReference botchestvo = database.getReference("otchestvo");
-    DatabaseReference bemail = database.getReference("email");
-    DatabaseReference bdr = database.getReference("dr");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,18 +52,21 @@ public class Main_trainer extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //инициализвация navigationview
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //чтение с бд
         DatabaseReference familia = user.child("familia");
         familia.addValueEventListener(new ValueEventListener() {
             @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 NavigationView nv = (NavigationView) findViewById(R.id.nav_view);;
                 View header = nv.getHeaderView(0);
                 TextView tv = (TextView)header.findViewById(R.id.name1);
                 String value = dataSnapshot.child("familia1").getValue(String.class);
                 tv.setText(value);
-                }
+            }
 
             @Override
             public void onCancelled(DatabaseError error) {
@@ -108,6 +102,7 @@ public class Main_trainer extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //описание действий по нажатию на кнопки меню
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

@@ -4,15 +4,11 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,14 +32,14 @@ public class Registration extends AppCompatActivity implements ValueEventListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        //Объявление компонентов GUI
         familia = (EditText) findViewById(R.id.familia);
         name = (EditText) findViewById(R.id.name);
         otchestvo = (EditText) findViewById(R.id.otchestvo);
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.passw);
         dr = (EditText) findViewById(R.id.dr);
-        //dr = (Spinner) findViewById(R.id.dr);
-
         registerButton = (Button) findViewById(R.id.reg);
         loginButton = (Button) findViewById(R.id.vhod);
 
@@ -53,13 +49,15 @@ public class Registration extends AppCompatActivity implements ValueEventListene
     }
 
     public void reg(View view) {
-
+        //Перенос данных в строковые значения
         String familia1 = familia.getText().toString();
         String name1 = name.getText().toString();
         String otchestvo1  = otchestvo.getText().toString();
         String email1 = email.getText().toString();
         String password1 = password.getText().toString();
         String dr1 = dr.getText().toString();
+
+        //Выделение синим цветом строк
         familia.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
         name.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
         otchestvo.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
@@ -67,7 +65,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
         password.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
         dr.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
 
-
+        //Проверка на заполненость данных пользователем
         if(TextUtils.isEmpty(familia1)){
             familia.getBackground().mutate().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
             Toast.makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля",Toast.LENGTH_SHORT).show();
@@ -98,6 +96,8 @@ public class Registration extends AppCompatActivity implements ValueEventListene
             Toast.makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля",Toast.LENGTH_SHORT).show();
             return;
         }
+
+        //Запись данных в бд
         DatabaseReference bfamilia = user.child("familia");
         DatabaseReference sfamilia = bfamilia.child("familia1");
         sfamilia.setValue(familia1);
@@ -114,6 +114,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
         DatabaseReference sdr = bdr.child("dr1");
         sdr.setValue(dr1);
 
+        //Проверка на наличие аутентификатора
         firebaseAuth.createUserWithEmailAndPassword(email1,password1)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
