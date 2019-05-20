@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,11 +28,11 @@ import com.google.firebase.database.ValueEventListener;
 public class Registration extends AppCompatActivity implements ValueEventListener{
     EditText email,password,familia,name,otchestvo,dr;
     Button registerButton,loginButton;
-    String n;
-    int n_i;
+    String key;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference user = database.getReference("users");
+    DatabaseReference n0 = database.getReference("n");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,21 +103,9 @@ public class Registration extends AppCompatActivity implements ValueEventListene
         }
 
         //Запись данных в бд
-        DatabaseReference bfamilia = user.child("familia");
-        DatabaseReference sfamilia = bfamilia.child("familia1");
-        sfamilia.setValue(familia1);
-        DatabaseReference bname = user.child("name");
-        DatabaseReference sname = bname.child("name1");
-        sname.setValue(name1);
-        DatabaseReference botchestvo = user.child("otchestvo");
-        DatabaseReference sotchestvo = botchestvo .child("otchestvo 1");
-        sotchestvo.setValue(otchestvo1);
-        DatabaseReference bemail = user.child("email");
-        DatabaseReference semail = bemail.child("email1");
-        semail.setValue(email1);
-        DatabaseReference bdr = user.child("dr");
-        DatabaseReference sdr = bdr.child("dr1");
-        sdr.setValue(dr1);
+        Upload upload = new Upload(name1,familia1, otchestvo1, dr1, email1);
+        key = user.push().getKey();
+        user.child(key).setValue(upload);
 
         //Проверка на наличие аутентификатора
         firebaseAuth.createUserWithEmailAndPassword(email1,password1)
@@ -124,6 +115,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
                         if(task.isSuccessful()){
                             startActivity(new Intent(getApplicationContext(),Main_trainer.class));
                             finish();
+                            //n = database.child("posts").push().getKey();
                         }
                         else{
                             Toast.makeText(getApplicationContext(),"Данный E-mail уже зарегистрирован",Toast.LENGTH_SHORT).show();
