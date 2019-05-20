@@ -25,9 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 public class Registration extends AppCompatActivity implements ValueEventListener{
     EditText email,password,familia,name,otchestvo,dr;
     Button registerButton,loginButton;
+    String n;
+    int n_i;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference user = database.getReference("users");
+    DatabaseReference user = database.getReference("user");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
