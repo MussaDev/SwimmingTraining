@@ -29,7 +29,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
     int n_i;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference user = database.getReference("user");
+    DatabaseReference user = database.getReference("users");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
