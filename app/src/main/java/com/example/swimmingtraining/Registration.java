@@ -28,11 +28,11 @@ import com.google.firebase.database.ValueEventListener;
 public class Registration extends AppCompatActivity implements ValueEventListener{
     EditText email,password,familia,name,otchestvo,dr;
     Button registerButton,loginButton;
-    String key;
+    public static String key;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference user = database.getReference("users");
-    DatabaseReference n0 = database.getReference("n");
+    DatabaseReference conformity = database.getReference("conformity");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +55,12 @@ public class Registration extends AppCompatActivity implements ValueEventListene
 
     public void reg(View view) {
         //Перенос данных в строковые значения
-        String familia1 = familia.getText().toString();
-        String name1 = name.getText().toString();
-        String otchestvo1  = otchestvo.getText().toString();
-        String email1 = email.getText().toString();
+        final String familia1 = familia.getText().toString();
+        final String name1 = name.getText().toString();
+        final String otchestvo1  = otchestvo.getText().toString();
+        final String email1 = email.getText().toString();
         String password1 = password.getText().toString();
-        String dr1 = dr.getText().toString();
+        final String dr1 = dr.getText().toString();
 
         //Выделение синим цветом строк
         familia.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
@@ -102,10 +102,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
             return;
         }
 
-        //Запись данных в бд
-        Upload upload = new Upload(name1,familia1, otchestvo1, dr1, email1);
-        key = user.push().getKey();
-        user.child(key).setValue(upload);
+
 
         //Проверка на наличие аутентификатора
         firebaseAuth.createUserWithEmailAndPassword(email1,password1)
@@ -113,6 +110,11 @@ public class Registration extends AppCompatActivity implements ValueEventListene
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            //Запись данных в бд
+                            Upload upload = new Upload(name1,familia1, otchestvo1, dr1, email1);
+                            key = user.push().getKey();
+                            user.child(key).setValue(upload);
+                            conformity.child(familia1 + " " + name1 + " " + otchestvo1).setValue(key);
                             startActivity(new Intent(getApplicationContext(),Main_trainer.class));
                             finish();
                             //n = database.child("posts").push().getKey();
