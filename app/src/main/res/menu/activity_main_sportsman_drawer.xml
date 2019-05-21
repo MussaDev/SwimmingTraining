@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_message"
+            android:title="Сообщения" />
+        <item
+            android:id="@+id/nav_list"
+            android:title="Список тренеров" />
+        <item
+            android:id="@+id/nav_balance"
+            android:title="Баланс" />
+        <item
+            android:id="@+id/nav_rairing"
+            android:title="Рейтинг" />
+    </group>
+
+    <item android:title="Связь">
+        <menu>
+            <item
+                android:id="@+id/nav_about"
+                android:title="Об авторе" />
+        </menu>
+    </item>
+
+</menu>
