@@ -16,8 +16,8 @@
     <string name="seach_vk">vk.com/don_mussa</string>
     <string name="sign_out">Выйти</string>
     <string-array name="position">
-        <item>Спортсмен</item>
-        <item>Тренер</item>
+        <item>Sportsman</item>
+        <item>Trainer</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

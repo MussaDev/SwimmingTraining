@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
     Button registerButton,loginButton;
     public static String key;
     FirebaseAuth firebaseAuth;
+    Spinner rol;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference user = database.getReference("users");
     DatabaseReference conformity = database.getReference("conformity");
@@ -47,6 +49,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
         dr = (EditText) findViewById(R.id.dr);
         registerButton = (Button) findViewById(R.id.reg);
         loginButton = (Button) findViewById(R.id.vhod);
+        rol = findViewById(R.id.rol);
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -61,6 +64,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
         final String email1 = email.getText().toString();
         String password1 = password.getText().toString();
         final String dr1 = dr.getText().toString();
+        final String srol = rol.getSelectedItem().toString();
 
         //Выделение синим цветом строк
         familia.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
@@ -111,7 +115,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             //Запись данных в бд
-                            Upload upload = new Upload(name1,familia1, otchestvo1, dr1, email1);
+                            Upload upload = new Upload(name1,familia1, otchestvo1, dr1, email1, srol);
                             key = user.push().getKey();
                             user.child(key).setValue(upload);
                             conformity.child(familia1 + " " + name1 + " " + otchestvo1).setValue(key);
