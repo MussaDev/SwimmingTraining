@@ -37,15 +37,6 @@ public class Main_sportsman extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -116,7 +107,7 @@ public class Main_sportsman extends AppCompatActivity
 
         } else if (id == R.id.nav_list) {
             getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                    new FragmentListTrainer()).commit();
+                    new FragmentList()).commit();
             navigationView.setCheckedItem(R.id.nav_list);
 
         } else if (id == R.id.nav_balance) {
@@ -132,7 +123,7 @@ public class Main_sportsman extends AppCompatActivity
         } else if (id == R.id.nav_about) {
             getSupportFragmentManager().beginTransaction().replace(R.id.container,
                     new FragmentAbout()).commit();
-            navigationView.setCheckedItem(R.id.nav_about);
+                navigationView.setCheckedItem(R.id.nav_about);
 
         }
 
