@@ -52,11 +52,27 @@ public class Main_sportsman extends AppCompatActivity
         familia.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                NavigationView nv = (NavigationView) findViewById(R.id.nav_view);;
-                View header = nv.getHeaderView(0);
-                TextView tv = (TextView)header.findViewById(R.id.name1);
-                String value = dataSnapshot.child("familia1").getValue(String.class);
-                tv.setText(value);
+                //чтение с бд
+                DatabaseReference uid = user.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                uid.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        NavigationView nv = (NavigationView) findViewById(R.id.nav_view);
+                        View header = nv.getHeaderView(0);
+                        TextView nname = (TextView)header.findViewById(R.id.name1);
+                        String valuename = dataSnapshot.child("name").getValue(String.class);
+                        nname.setText(valuename);
+                        TextView nemail = (TextView)header.findViewById(R.id.email1);
+                        String valueemail = dataSnapshot.child("email").getValue(String.class);
+                        nemail.setText(valueemail);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("Failed to read value.", error.toException());
+                    }
+                });
             }
 
             @Override
