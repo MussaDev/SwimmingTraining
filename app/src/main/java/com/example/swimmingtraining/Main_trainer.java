@@ -2,8 +2,6 @@ package com.example.swimmingtraining;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,8 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Main_trainer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     //Объявление элементов GUI
+    FirebaseAuth firebaseAuth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference user = database.getReference("users");
     @Override
@@ -36,7 +33,6 @@ public class Main_trainer extends AppCompatActivity
         setContentView(R.layout.activity_main_trainer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -48,10 +44,8 @@ public class Main_trainer extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //чтение с бд
-        Intent intent = getIntent();
-        String llogin = intent.getStringExtra("login");
-        DatabaseReference plogin = user.child(llogin);
-        plogin.addValueEventListener(new ValueEventListener() {
+        DatabaseReference uid = user.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        uid.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 NavigationView nv = (NavigationView) findViewById(R.id.nav_view);
