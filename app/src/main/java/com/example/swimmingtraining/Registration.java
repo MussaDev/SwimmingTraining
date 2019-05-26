@@ -34,7 +34,7 @@ import static android.widget.Toast.*;
 public class Registration extends AppCompatActivity implements ValueEventListener{
     EditText email,password,familia,name,otchestvo,dr, login;
     Button registerButton,loginButton;
-    public static String uid;
+    //public static String rol1;
     FirebaseAuth firebaseAuth;
     Spinner rol;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -128,24 +128,39 @@ public class Registration extends AppCompatActivity implements ValueEventListene
                             if(currentFirebaseUser !=null)
 
                             {
+                                //внос данных в таблицу user -> бд
                                 Upload uploadUser = new Upload(name1,familia1, otchestvo1, dr1, login1, email1, srol);
                                 mDatabaseReference1.child(firebaseAuth.getUid()).setValue(uploadUser);
-                                //uid = currentFirebaseUser.getUid();
                             } else {
-                                makeText(getApplicationContext(),uid, LENGTH_SHORT).show();
                             }
-//                            //Запись данных в бд
-//                            Upload upload = new Upload(name1,familia1, otchestvo1, dr1, login1, email1, srol);
-//                            //key = user.push().getKey();
-//                            user.child(login1).setValue(upload);
-//                            conformity.child(familia1 + " " + name1 + " " + otchestvo1).setValue(key);
-                            Intent intent = new Intent(Registration.this, Main_trainer.class);
-//
-//                            // в ключ username пихаем текст из первого текстового поля
-//                            intent.putExtra("login", login1);
-                            startActivity(intent);
-                            finish();
-//                            //n = database.child("posts").push().getKey();
+
+                            //Вход к нужному пользователю
+                            DatabaseReference uid = user.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            uid.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    final String rol1 = dataSnapshot.child("rol").getValue(String.class);
+
+                                    if (rol1.equals("Sportsman")){
+                                        Intent intent = new Intent(Registration.this, Main_sportsman.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                    else if (rol1.equals("Trainer")){
+                                        Intent intent = new Intent(Registration.this, Main_trainer.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    // Failed to read value
+                                    Log.w("Failed to read value.", error.toException());
+                                }
+                            });
+
+
                         }
                         else{
                             makeText(getApplicationContext(),"Данный E-mail уже зарегистрирован", LENGTH_SHORT).show();
