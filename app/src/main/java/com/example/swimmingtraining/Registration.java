@@ -39,6 +39,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
     Spinner rol;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference user = database.getReference("users");
+    DatabaseReference roli = database.getReference("rol");
     DatabaseReference conformity = database.getReference("conformity");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,11 +143,13 @@ public class Registration extends AppCompatActivity implements ValueEventListene
                                     final String rol1 = dataSnapshot.child("rol").getValue(String.class);
 
                                     if (rol1.equals("Sportsman")){
+                                        roli.child("sportsman").child(firebaseAuth.getUid()).setValue(login1);
                                         Intent intent = new Intent(Registration.this, Main_sportsman.class);
                                         startActivity(intent);
                                         finish();
                                     }
                                     else if (rol1.equals("Trainer")){
+                                        roli.child("trainer").child(firebaseAuth.getUid()).setValue(login1);
                                         Intent intent = new Intent(Registration.this, Main_trainer.class);
                                         startActivity(intent);
                                         finish();

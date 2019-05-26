@@ -12,7 +12,7 @@
         <activity
             android:name=".Main_sportsman"
             android:label="@string/title_activity_main_sportsman"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Registration"
             android:label="@string/title_activity_registration"
