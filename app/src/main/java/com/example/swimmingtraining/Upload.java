@@ -7,6 +7,7 @@ public class Upload {
     public String otchestvo;
     public String dr;
     public String login;
+    public String email;
     public String rol;
 
     // Default constructor required for calls to
@@ -14,12 +15,13 @@ public class Upload {
     public Upload() {
     }
 
-    public Upload(String name, String famailia, String otchestvo, String dr, String login, String rol) {
+    public Upload(String name, String famailia, String otchestvo, String dr, String login, String email, String rol) {
         this.name = name;
         this.famailia = famailia;
         this.otchestvo=otchestvo;
         this.dr=dr;
         this.login = login;
+        this.email = email;
         this.rol = rol;
     }
 
@@ -32,12 +34,12 @@ public class Upload {
     public String getotchestvo() {
         return otchestvo;
     }
-
+    public String getEmail() {
+        return email;
+    }
     public String getdr() {
         return dr;
     }
-    public String getlogin() {
-        return login;
-    }
+    public String getlogin() { return login; }
 }
 

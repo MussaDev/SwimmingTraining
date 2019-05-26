@@ -48,15 +48,20 @@ public class Main_trainer extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //чтение с бд
-        DatabaseReference familia = user.child("familia");
-        familia.addValueEventListener(new ValueEventListener() {
+        Intent intent = getIntent();
+        String llogin = intent.getStringExtra("login");
+        DatabaseReference plogin = user.child(llogin);
+        plogin.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                NavigationView nv = (NavigationView) findViewById(R.id.nav_view);;
+                NavigationView nv = (NavigationView) findViewById(R.id.nav_view);
                 View header = nv.getHeaderView(0);
-                TextView tv = (TextView)header.findViewById(R.id.name1);
-                String value = dataSnapshot.child("familia1").getValue(String.class);
-                tv.setText(value);
+                TextView nname = (TextView)header.findViewById(R.id.name1);
+                String valuename = dataSnapshot.child("name").getValue(String.class);
+                nname.setText(valuename);
+                TextView nemail = (TextView)header.findViewById(R.id.email1);
+                String valueemail = dataSnapshot.child("email").getValue(String.class);
+                nemail.setText(valueemail);
             }
 
             @Override

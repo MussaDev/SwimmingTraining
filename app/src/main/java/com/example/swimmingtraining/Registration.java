@@ -27,7 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Registration extends AppCompatActivity implements ValueEventListener{
-    EditText email,password,familia,name,otchestvo,dr;
+    EditText email,password,familia,name,otchestvo,dr, login;
     Button registerButton,loginButton;
     public static String key;
     FirebaseAuth firebaseAuth;
@@ -50,6 +50,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
         registerButton = (Button) findViewById(R.id.reg);
         loginButton = (Button) findViewById(R.id.vhod);
         rol = findViewById(R.id.rol);
+        login = (EditText) findViewById(R.id.login);
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -65,6 +66,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
         String password1 = password.getText().toString();
         final String dr1 = dr.getText().toString();
         final String srol = rol.getSelectedItem().toString();
+        final String login1 = login.getText().toString();
 
         //Выделение синим цветом строк
         familia.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
@@ -115,11 +117,15 @@ public class Registration extends AppCompatActivity implements ValueEventListene
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             //Запись данных в бд
-                            Upload upload = new Upload(name1,familia1, otchestvo1, dr1, email1, srol);
-                            key = user.push().getKey();
-                            user.child(key).setValue(upload);
+                            Upload upload = new Upload(name1,familia1, otchestvo1, dr1, login1, email1, srol);
+                            //key = user.push().getKey();
+                            user.child(login1).setValue(upload);
                             conformity.child(familia1 + " " + name1 + " " + otchestvo1).setValue(key);
-                            startActivity(new Intent(getApplicationContext(),Main_trainer.class));
+                            Intent intent = new Intent(Registration.this, Main_trainer.class);
+
+                            // в ключ username пихаем текст из первого текстового поля
+                            intent.putExtra("login", login1);
+                            startActivity(intent);
                             finish();
                             //n = database.child("posts").push().getKey();
                         }
