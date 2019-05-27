@@ -2,29 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/tvUser" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvot"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvTime"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="TextView" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvk"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvMessage"
-        android:layout_below="@+id/tvUser"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginTop="20dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvmessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="TextView" />
 </RelativeLayout>

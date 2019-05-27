@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Perepiska"></activity>
         <activity
             android:name=".Main_sportsman"
             android:label="@string/title_activity_main_sportsman"

@@ -118,7 +118,7 @@ public class Main_sportsman extends AppCompatActivity
 
         if (id == R.id.nav_message) {
             getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                    new FragmentMessage()).commit();
+                    new FragmentMessageSportsman()).commit();
             navigationView.setCheckedItem(R.id.nav_message);
 
         } else if (id == R.id.nav_list) {
