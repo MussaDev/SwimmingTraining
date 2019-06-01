@@ -143,13 +143,21 @@ public class Registration extends AppCompatActivity implements ValueEventListene
                                     final String rol1 = dataSnapshot.child("rol").getValue(String.class);
 
                                     if (rol1.equals("Sportsman")){
-                                        roli.child("sportsman").child(firebaseAuth.getUid()).setValue(login1);
+                                        UList ulistik = new UList(familia1, name1, otchestvo1);
+                                        roli
+                                                .child("sportsman")
+                                                .child(firebaseAuth.getUid())
+                                                .setValue(ulistik);
                                         Intent intent = new Intent(Registration.this, Main_sportsman.class);
                                         startActivity(intent);
                                         finish();
                                     }
                                     else if (rol1.equals("Trainer")){
-                                        roli.child("trainer").child(firebaseAuth.getUid()).setValue(login1);
+                                        UList ulistik = new UList(familia1, name1, otchestvo1);
+                                        roli
+                                                .child("trainer")
+                                                .child(firebaseAuth.getUid())
+                                                .setValue(ulistik);
                                         Intent intent = new Intent(Registration.this, Main_trainer.class);
                                         startActivity(intent);
                                         finish();
@@ -160,7 +168,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
                                 public void onCancelled(DatabaseError error) {
                                     // Failed to read value
                                     Log.w("Failed to read value.", error.toException());
-                                }
+                                }   
                             });
 
 
