@@ -26,7 +26,7 @@ public class Perepiska extends AppCompatActivity {
     DatabaseReference mDatabaseReference;
 
     //list to store uploads data
-    List<Chat> chatList;
+    List<UChat> uchatList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +42,18 @@ public class Perepiska extends AppCompatActivity {
 
                 // Read the input field and push a new instance
                 // of ChatMessage to the Firebase database
-                Chat chatik = new Chat(input1.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(),"Vasia");
+                UChat uchatik = new UChat(input1.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(),"Vasia");
                 FirebaseDatabase.getInstance()
                         .getReference()
                         .child("message")
                         .push()
-                        .setValue(chatik);
+                        .setValue(uchatik);
 
                 // Clear the input
                 input1.setText("");
             }
         });
-        chatList = new ArrayList<>();
+        uchatList = new ArrayList<>();
         listView = findViewById(R.id.list_of_messages);
 
         //getting the database reference
@@ -64,16 +64,16 @@ public class Perepiska extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Chat chat = postSnapshot.getValue(Chat.class);
-                    chatList.add(chat);
+                    UChat uchat = postSnapshot.getValue(UChat.class);
+                    uchatList.add(uchat);
                 }
 
-                String[] uploads = new String[chatList.size()];
+                String[] uploads = new String[uchatList.size()];
 
                 for (int i = 0; i < uploads.length; i++) {
-                    uploads[i] = "Сообщение " +chatList.get(i).getSms() + "\n"
-                            + "От: " +chatList.get(i).getOt() + "\n"
-                            + "к: " +chatList.get(i).getK() + "\n";
+                    uploads[i] = "Сообщение " +uchatList.get(i).getSms() + "\n"
+                            + "От: " +uchatList.get(i).getOt() + "\n"
+                            + "к: " +uchatList.get(i).getK() + "\n";
                 }
 
 //displaying it to list

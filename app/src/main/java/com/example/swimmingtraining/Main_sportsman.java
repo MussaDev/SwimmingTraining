@@ -123,7 +123,7 @@ public class Main_sportsman extends AppCompatActivity
 
         } else if (id == R.id.nav_list) {
             getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                    new FragmentList()).commit();
+                    new FragmentListSportsman()).commit();
             navigationView.setCheckedItem(R.id.nav_list);
 
         } else if (id == R.id.nav_balance) {

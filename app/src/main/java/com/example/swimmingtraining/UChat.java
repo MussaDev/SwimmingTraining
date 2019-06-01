@@ -1,6 +1,6 @@
 package com.example.swimmingtraining;
 
-public class Chat {
+public class UChat {
 
     public String sms;
     public String ot;
@@ -9,10 +9,10 @@ public class Chat {
 
     // Default constructor required for calls to
 // DataSnapshot.getValue(User.class)
-    public Chat() {
+    public UChat() {
     }
 
-    public Chat(String sms, String ot, String k) {
+    public UChat(String sms, String ot, String k) {
         this.sms = sms;
         this.ot = ot;
         this.k=k;
