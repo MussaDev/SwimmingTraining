@@ -1,7 +1,13 @@
 package com.example.swimmingtraining;
 
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -27,37 +33,66 @@ public class ListSportsman extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_sportsman);
-            ulist = new ArrayList<>();
-            listViewListSportsman = findViewById(R.id.list_sportsman);
+        ulist = new ArrayList<>();
+        listViewListSportsman = findViewById(R.id.list_sportsman);
+        registerForContextMenu(listViewListSportsman);
 
-            //getting the database reference
-            DatabaseReference dbrol = FirebaseDatabase.getInstance().getReference("rol");
-            DatabaseReference dbsportsman = dbrol.child("sportsman");
+        //getting the database reference
+        DatabaseReference dbrol = FirebaseDatabase.getInstance().getReference("rol");
+        DatabaseReference dbsportsman = dbrol.child("sportsman");
 
-    //retrieving upload data from firebase database
-            dbsportsman.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        UList plist = postSnapshot.getValue(UList.class);
-                        ulist.add(plist);
-                    }
-
-                    String[] uplist = new String[ulist.size()];
-
-                    for (int i = 0; i < uplist.length; i++) {
-                        uplist[i] = ulist.get(i).getFam() + " " + ulist.get(i).getIm() + " " + ulist.get(i).getOtch() + "\n";
-                    }
-
-    //displaying it to list
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, uplist);
-                    listViewListSportsman.setAdapter(adapter);
+        //retrieving upload data from firebase database
+        dbsportsman.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    UList plist = postSnapshot.getValue(UList.class);
+                    ulist.add(plist);
                 }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                String[] uplist = new String[ulist.size()];
 
+                for (int i = 0; i < uplist.length; i++) {
+                    uplist[i] = ulist.get(i).getFam() + " " + ulist.get(i).getIm() + " " + ulist.get(i).getOtch() + "\n";
                 }
-            });
-        }
+
+                //displaying it to list
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, uplist);
+                listViewListSportsman.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+//adding a clicklistener on listview
+//        listViewListSportsman.setOnCreateContextMenuListener(new AdapterView.OnCreateContextMenuListener() {
+//            @Override
+//            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//
+//                ListSportsman.super.onCreateContextMenu(menu, v, menuInfo);
+//                MenuInflater inflater = getMenuInflater();
+//                inflater.inflate(R.menu.context_menu, menu);
+//
+//                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+//                position = info.position;
+//
+//
+//            }
+//        });
+
+    }
+//    @Override
+//    public boolean onContextItemSelected(MenuItem item) {
+//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+//        Cursor cursor = (Cursor) listViewListSportsman.getAdapter().getItem(position);
+//
+//        case R.id.edit:
+//        return true;
+//
+//        default:
+//        return super.onContextItemSelected(item);
+//    }
 }

@@ -1,6 +1,7 @@
 package com.example.swimmingtraining;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -115,4 +116,8 @@ public class Login extends AppCompatActivity {
     }
 
 
+    public void gost(View view) {
+        Intent intent = new Intent(Login.this, WhatchVideo.class);
+        startActivity(intent);
+    }
 }
