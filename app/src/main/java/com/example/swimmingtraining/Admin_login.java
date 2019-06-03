@@ -65,10 +65,11 @@ public class Admin_login extends AppCompatActivity {
         String slogin = login.getText().toString();
         String spassw = passw.getText().toString();
         if (datalogin.equals(slogin) && datapassw.equals(spassw)) {
-            Toast.makeText(getApplicationContext(),"Вы вошли",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Admin_login.this, AdminPanel.class);
+            startActivity(intent);
         }
         else {
-            Toast.makeText(getApplicationContext(),"Вы не вошли",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Неверный логин или пароль.",Toast.LENGTH_SHORT).show();
         }
     }
 }
