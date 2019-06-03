@@ -110,4 +110,22 @@
         app:layout_constraintTop_toBottomOf="@+id/reg"
         app:layout_constraintVertical_bias="0.111"
         android:onClick="gost"/>
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="56dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.896"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.324"
+        app:srcCompat="@drawable/admin_click"
+        android:onClick="go_admin" />
+
 </android.support.constraint.ConstraintLayout>

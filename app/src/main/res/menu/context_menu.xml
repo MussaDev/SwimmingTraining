@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/edit"
-        android:title="меню" />
+    <!--<item android:id="@+id/infoOfBook"-->
+    <!--android:title="Информация о книге" />-->
+    <item android:id="@+id/addBookToLibs"
+        android:title="Скачать книгу" />
+    <item android:id="@+id/reviewToBook"
+        android:title="Написать отзыв" />
+
+    <item android:title="Оценить книгу"
+        android:id="@+id/ratingToBook1">
+        <menu>
+            <item
+                android:id="@+id/rating1"
+                android:title="1 звезда" />
+            <item
+                android:id="@+id/rating2"
+                android:title="2 звезды" />
+            <item
+                android:id="@+id/rating3"
+                android:title="3 звезды" />
+            <item
+                android:id="@+id/rating4"
+                android:title="4 звезды" />
+            <item
+                android:id="@+id/rating5"
+                android:title="5 звезд" />
+        </menu>
+    </item>
 </menu>

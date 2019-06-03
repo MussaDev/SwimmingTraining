@@ -34,8 +34,22 @@ public class ListSportsman extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_sportsman);
         ulist = new ArrayList<>();
-        listViewListSportsman = findViewById(R.id.list_sportsman);
+
+        listViewListSportsman = (ListView) findViewById(R.id.list_sportsman);
         registerForContextMenu(listViewListSportsman);
+
+//adding a clicklistener on listview
+        listViewListSportsman.setOnCreateContextMenuListener(new AdapterView.OnCreateContextMenuListener() {
+            @Override
+            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+
+                ListSportsman.super.onCreateContextMenu(menu, v, menuInfo);
+                MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.context_menu, menu);
+
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+            }
+        });
 
         //getting the database reference
         DatabaseReference dbrol = FirebaseDatabase.getInstance().getReference("rol");
@@ -77,7 +91,6 @@ public class ListSportsman extends AppCompatActivity {
 //                inflater.inflate(R.menu.context_menu, menu);
 //
 //                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-//                position = info.position;
 //
 //
 //            }
@@ -87,9 +100,11 @@ public class ListSportsman extends AppCompatActivity {
 //    @Override
 //    public boolean onContextItemSelected(MenuItem item) {
 //        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-//        Cursor cursor = (Cursor) listViewListSportsman.getAdapter().getItem(position);
 //
-//        case R.id.edit:
+//        case R.id.addBookToLibs:
+//        return true;
+//
+//        case R.id.reviewToBook:
 //        return true;
 //
 //        default:

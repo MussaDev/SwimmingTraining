@@ -120,4 +120,9 @@ public class Login extends AppCompatActivity {
         Intent intent = new Intent(Login.this, WhatchVideo.class);
         startActivity(intent);
     }
+
+    public void go_admin(View view) {
+        Intent intent = new Intent(Login.this, Admin_login.class);
+        startActivity(intent);
+    }
 }
