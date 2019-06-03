@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:id="@+id/infoOfBook"-->
+    <!--android:title="Информация о книге" />-->
+    <item android:id="@+id/addtrainer"
+        android:title="Вступить к тренеру" />
+
+    <item android:title="Оценить тренера"
+        android:id="@+id/ratingToTrainer">
+        <menu>
+            <item
+                android:id="@+id/rating1"
+                android:title="1 звезда" />
+            <item
+                android:id="@+id/rating2"
+                android:title="2 звезды" />
+            <item
+                android:id="@+id/rating3"
+                android:title="3 звезды" />
+            <item
+                android:id="@+id/rating4"
+                android:title="4 звезды" />
+            <item
+                android:id="@+id/rating5"
+                android:title="5 звезд" />
+        </menu>
+    </item>
+</menu>

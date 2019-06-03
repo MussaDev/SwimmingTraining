@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,11 +53,11 @@ public class ListSportsman extends AppCompatActivity {
         });
 
         //getting the database reference
-        DatabaseReference dbrol = FirebaseDatabase.getInstance().getReference("rol");
-        DatabaseReference dbsportsman = dbrol.child("sportsman");
+        DatabaseReference dbsootv = FirebaseDatabase.getInstance().getReference("sootv");
+        DatabaseReference dbuid = dbsootv.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         //retrieving upload data from firebase database
-        dbsportsman.addValueEventListener(new ValueEventListener() {
+        dbuid.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -80,34 +81,5 @@ public class ListSportsman extends AppCompatActivity {
 
             }
         });
-
-//adding a clicklistener on listview
-//        listViewListSportsman.setOnCreateContextMenuListener(new AdapterView.OnCreateContextMenuListener() {
-//            @Override
-//            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-//
-//                ListSportsman.super.onCreateContextMenu(menu, v, menuInfo);
-//                MenuInflater inflater = getMenuInflater();
-//                inflater.inflate(R.menu.context_menu, menu);
-//
-//                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-//
-//
-//            }
-//        });
-
     }
-//    @Override
-//    public boolean onContextItemSelected(MenuItem item) {
-//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-//
-//        case R.id.addBookToLibs:
-//        return true;
-//
-//        case R.id.reviewToBook:
-//        return true;
-//
-//        default:
-//        return super.onContextItemSelected(item);
-//    }
 }
