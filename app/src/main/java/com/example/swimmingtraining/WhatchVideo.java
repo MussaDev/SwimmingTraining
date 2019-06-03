@@ -1,7 +1,11 @@
 package com.example.swimmingtraining;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -36,7 +40,8 @@ public class WhatchVideo extends AppCompatActivity {
                 String[] uploads = new String[uvideo.size()];
 
                 for (int i = 0; i < uploads.length; i++) {
-                    uploads[i] = uvideo.get(i).getName_video() + "\n";
+                    uploads[i] = uvideo.get(i).getName_video() + "\n"
+                    + uvideo.get(i).getUrl() + "\n";
                 }
 
 //displaying it to list
@@ -49,5 +54,24 @@ public class WhatchVideo extends AppCompatActivity {
 
             }
         });
+
+        //Обработка нажатия на элемент listview
+        listvideo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> arg0,
+                                    View arg1, int position, long arg3)
+            {
+                String selectedFromList = (listvideo.getItemAtPosition(position)).toString();
+                String[] parts = selectedFromList.split("\n");
+                String part1 = parts[1]; // UID книги
+                Intent browserIntent = new
+                        Intent(Intent.ACTION_VIEW, Uri.parse(part1));
+                startActivity(browserIntent);
+//                switch (position) {
+//                    case 0:
+//                }
+            }
+        });
     }
 }
+
