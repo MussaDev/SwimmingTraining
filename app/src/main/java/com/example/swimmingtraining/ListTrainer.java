@@ -80,5 +80,20 @@ public class ListTrainer extends AppCompatActivity {
 
             }
         });
+
+//        listViewListTraineer.setOnCreateContextMenuListener(new AdapterView.OnCreateContextMenuListener() {
+//            @Override
+//            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//
+//                ListTrainer.super.onCreateContextMenu(menu, v, menuInfo);
+//                MenuInflater inflater = getMenuInflater();
+//                inflater.inflate(R.menu.context_menu_trainer, menu);
+//
+//                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+//                position = info.position;
+//
+//
+//            }
+//        });
     }
 }
