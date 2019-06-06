@@ -139,22 +139,42 @@ public class Registration extends AppCompatActivity implements ValueEventListene
 
                                     if (rol1.equals("Sportsman")){
                                         UList ulistik = new UList(familia1, name1, otchestvo1);
+
+                                        //Запись спортсменов в БД
                                         mDatabaseReference1.child(firebaseAuth.getUid()).child("trainer").setValue(" ");
+
+                                        //Запись в список спортсменов
                                         roli
                                                 .child("sportsman")
                                                 .child(firebaseAuth.getUid())
                                                 .setValue(ulistik);
+
+                                        //Перехдод на активити
                                         Intent intent = new Intent(Registration.this, Main_sportsman.class);
                                         startActivity(intent);
                                         finish();
                                     }
                                     else if (rol1.equals("Trainer")){
+
+                                        //Создание таблицы запросов
+                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                        DatabaseReference user = database.getReference("Zapros");
+                                        user
+                                                .child(firebaseAuth.getUid())
+                                                .setValue(" ");
+
                                         UList ulistik = new UList(familia1, name1, otchestvo1);
+
+                                        //Поле спортсменов
                                         mDatabaseReference1.child(firebaseAuth.getUid()).child("sportsman").setValue(" ");
+
+                                        //Запись в саисок тренеров
                                         roli
                                                 .child("trainer")
                                                 .child(firebaseAuth.getUid())
                                                 .setValue(ulistik);
+
+                                        //Переход на активити
                                         Intent intent = new Intent(Registration.this, Main_trainer.class);
                                         startActivity(intent);
                                         finish();

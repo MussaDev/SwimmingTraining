@@ -139,7 +139,7 @@ public class Main_sportsman extends AppCompatActivity
         } else if (id == R.id.nav_about) {
             getSupportFragmentManager().beginTransaction().replace(R.id.container,
                     new FragmentAbout()).commit();
-                navigationView.setCheckedItem(R.id.nav_about);
+            navigationView.setCheckedItem(R.id.nav_about);
 
         }
 
