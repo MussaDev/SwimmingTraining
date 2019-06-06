@@ -11,6 +11,9 @@
             android:id="@+id/nav_list"
             android:title="Список спортсменов" />
         <item
+            android:id="@+id/nav_zapros"
+            android:title="Запросы на вступление" />
+        <item
             android:id="@+id/nav_balance"
             android:title="Баланс" />
         <item

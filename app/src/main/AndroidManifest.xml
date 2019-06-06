@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/mainico_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminPanel"></activity>
+        <activity android:name=".ZaprosTrainer"></activity>
+        <activity android:name=".AdminPanel" />
         <activity android:name=".Admin_login" />
         <activity android:name=".WhatchVideo" />
         <activity android:name=".ListTrainer" />

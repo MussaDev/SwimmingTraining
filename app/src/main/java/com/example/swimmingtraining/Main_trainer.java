@@ -109,7 +109,12 @@ public class Main_trainer extends AppCompatActivity
                     new FragmentListSportsman()).commit();
             navigationView.setCheckedItem(R.id.nav_list);
 
-        } else if (id == R.id.nav_balance) {
+        } else if (id == R.id.nav_zapros) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                    new FragmentListSportsman()).commit();
+            navigationView.setCheckedItem(R.id.nav_zapros);
+
+        }else if (id == R.id.nav_balance) {
             getSupportFragmentManager().beginTransaction().replace(R.id.container,
                     new FragmentBalance()).commit();
             navigationView.setCheckedItem(R.id.nav_balance);
