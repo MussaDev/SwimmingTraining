@@ -1,21 +1,16 @@
 package com.example.swimmingtraining;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -130,8 +125,8 @@ public class Registration extends AppCompatActivity implements ValueEventListene
 
                             {
                                 //внос данных в таблицу user -> бд
-                                Upload uploadUser = new Upload(name1,familia1, otchestvo1, dr1, login1, email1, srol);
-                                mDatabaseReference1.child(firebaseAuth.getUid()).setValue(uploadUser);
+                                Upload uploadSportsmanUser = new Upload(name1,familia1, otchestvo1, dr1, login1, email1, srol, "0");
+                                mDatabaseReference1.child(firebaseAuth.getUid()).setValue(uploadSportsmanUser);
                             } else {
                             }
 
@@ -144,6 +139,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
 
                                     if (rol1.equals("Sportsman")){
                                         UList ulistik = new UList(familia1, name1, otchestvo1);
+                                        mDatabaseReference1.child(firebaseAuth.getUid()).child("trainer").setValue(" ");
                                         roli
                                                 .child("sportsman")
                                                 .child(firebaseAuth.getUid())
@@ -154,6 +150,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
                                     }
                                     else if (rol1.equals("Trainer")){
                                         UList ulistik = new UList(familia1, name1, otchestvo1);
+                                        mDatabaseReference1.child(firebaseAuth.getUid()).child("sportsman").setValue(" ");
                                         roli
                                                 .child("trainer")
                                                 .child(firebaseAuth.getUid())
