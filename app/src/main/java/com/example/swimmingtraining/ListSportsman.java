@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +25,7 @@ import java.util.List;
 public class ListSportsman extends AppCompatActivity {
     //the listview
     ListView listViewListSportsman;
-
+    int position;
     //database reference to get uploads data
     DatabaseReference dbrol;
 
@@ -49,6 +50,7 @@ public class ListSportsman extends AppCompatActivity {
                 inflater.inflate(R.menu.context_menu, menu);
 
                 AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+                position = info.position;
             }
         });
 
@@ -81,5 +83,20 @@ public class ListSportsman extends AppCompatActivity {
 
             }
         });
+
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId())
+        {
+            case R.id.addBookToLibs:
+                //выполняем операции по удалению
+                Toast.makeText(getApplicationContext(), "Удаление", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 }
