@@ -5,6 +5,7 @@ public class UList {
     public String fam;
     public String im;
     public String otch;
+    public String uid;
 
 
     // Default constructor required for calls to
@@ -12,10 +13,11 @@ public class UList {
     public UList() {
     }
 
-    public UList(String fam, String im, String otch) {
+    public UList(String fam, String im, String otch, String uid) {
         this.fam = fam;
         this.im = im;
-        this.otch=otch;
+        this.otch = otch;
+        this.uid = uid;
     }
 
     public String getFam() {
@@ -27,4 +29,5 @@ public class UList {
     public String getOtch() {
         return otch;
     }
+    public String getUidik() { return uid; }
 }

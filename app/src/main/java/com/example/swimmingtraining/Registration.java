@@ -138,7 +138,8 @@ public class Registration extends AppCompatActivity implements ValueEventListene
                                     final String rol1 = dataSnapshot.child("rol").getValue(String.class);
 
                                     if (rol1.equals("Sportsman")){
-                                        UList ulistik = new UList(familia1, name1, otchestvo1);
+                                        String uid = firebaseAuth.getUid();
+                                        UList ulistik = new UList(familia1, name1, otchestvo1,uid);
 
                                         //Запись спортсменов в БД
                                         mDatabaseReference1.child(firebaseAuth.getUid()).child("trainer").setValue(" ");
@@ -162,8 +163,8 @@ public class Registration extends AppCompatActivity implements ValueEventListene
                                         user
                                                 .child(firebaseAuth.getUid())
                                                 .setValue(" ");
-
-                                        UList ulistik = new UList(familia1, name1, otchestvo1);
+                                        String uid = firebaseAuth.getUid();
+                                        UList ulistik = new UList(familia1, name1, otchestvo1,uid);
 
                                         //Поле спортсменов
                                         mDatabaseReference1.child(firebaseAuth.getUid()).child("sportsman").setValue(" ");
