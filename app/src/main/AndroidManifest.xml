@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/mainico_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GoustMenu"></activity>
+        <activity android:name=".AboutTrainer"></activity>
+        <activity android:name=".GoustMenu" />
         <activity android:name=".ListTrainerToGoust" />
         <activity android:name=".ZaprosTrainer" />
         <activity android:name=".AdminPanel" />

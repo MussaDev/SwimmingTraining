@@ -45,7 +45,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
         familia = (EditText) findViewById(R.id.familia);
         name = (EditText) findViewById(R.id.name);
         otchestvo = (EditText) findViewById(R.id.otchestvo);
-        email = (EditText) findViewById(R.id.email);
+        email = (EditText) findViewById(R.id.dr);
         password = (EditText) findViewById(R.id.passw);
         dr = (EditText) findViewById(R.id.dr);
         registerButton = (Button) findViewById(R.id.reg);
@@ -143,6 +143,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
 
                                         //Запись спортсменов в БД
                                         mDatabaseReference1.child(firebaseAuth.getUid()).child("trainer").setValue(" ");
+                                        mDatabaseReference1.child("rating").setValue("0");
 
                                         //Запись в список спортсменов
                                         roli
@@ -168,6 +169,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
 
                                         //Поле спортсменов
                                         mDatabaseReference1.child(firebaseAuth.getUid()).child("sportsman").setValue(" ");
+                                        mDatabaseReference1.child("rating").setValue("0");
 
                                         //Запись в саисок тренеров
                                         roli
