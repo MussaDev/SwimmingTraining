@@ -43,24 +43,11 @@ public class ListTrainer extends AppCompatActivity {
         listViewListTraineer = (ListView) findViewById(R.id.list_trainer);
         registerForContextMenu(listViewListTraineer);
 
-//adding a clicklistener on listview
-        listViewListTraineer.setOnCreateContextMenuListener(new AdapterView.OnCreateContextMenuListener() {
-            @Override
-            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
-                ListTrainer.super.onCreateContextMenu(menu, v, menuInfo);
-                MenuInflater inflater = getMenuInflater();
-                inflater.inflate(R.menu.context_menu_trainer, menu);
-
-                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-            }
-        });
-
         //getting the database reference
         DatabaseReference dbrol = FirebaseDatabase.getInstance().getReference("rol");
         DatabaseReference dbsportsman = dbrol.child("trainer");
 
-        //retrieving upload data from firebase database
+        //Вывод списка
         dbsportsman.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -86,6 +73,7 @@ public class ListTrainer extends AppCompatActivity {
             }
         });
 
+        //контекстное меню
         listViewListTraineer.setOnCreateContextMenuListener(new AdapterView.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -101,6 +89,8 @@ public class ListTrainer extends AppCompatActivity {
             }
         });
     }
+
+    //Дествие контектсного меню
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
