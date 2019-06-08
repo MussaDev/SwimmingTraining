@@ -149,6 +149,10 @@ public class ZaprosTrainer extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Выполнено",Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.no:
+                //Очтистка запроса
+                DatabaseReference dbzaprosno = FirebaseDatabase.getInstance().getReference("Zapros");
+                DatabaseReference dbuidno = dbzaprosno.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                dbuidno.setValue(" ");
                 Toast.makeText(getApplicationContext(),"no",Toast.LENGTH_SHORT).show();
                 return true;
             default:
