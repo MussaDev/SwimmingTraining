@@ -10,13 +10,16 @@ public class Upload {
     public String email;
     public String rol;
     public String raiting;
+    public String stuge;
+    public String about;
 
     // Default constructor required for calls to
 // DataSnapshot.getValue(User.class)
     public Upload() {
     }
 
-    public Upload(String name, String famailia, String otchestvo, String dr, String login, String email, String rol, String raiting) {
+    public Upload(String name, String famailia, String otchestvo, String dr, String login, String email, String rol,
+                  String raiting, String stuge, String about) {
         this.name = name;
         this.famailia = famailia;
         this.otchestvo=otchestvo;
@@ -24,7 +27,8 @@ public class Upload {
         this.login = login;
         this.email = email;
         this.rol = rol;
-        this.raiting = raiting;
+        this.stuge = stuge;
+        this.about = about;
     }
 
     public String getName() {
@@ -44,5 +48,7 @@ public class Upload {
     }
     public String getlogin() { return login; }
     public String getRaiting() { return raiting; }
+    public String getStuge() { return stuge; }
+    public String getAbout() { return about; }
 }
 

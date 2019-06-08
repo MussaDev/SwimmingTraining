@@ -70,7 +70,7 @@
                     android:inputType="textPersonName" />
 
                 <EditText
-                    android:id="@+id/stage"
+                    android:id="@+id/stuge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -90,15 +90,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="Пароль"
-                    android:inputType="textPersonName" />
-
-                <EditText
-                    android:id="@+id/stuge"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:hint="Стаж (лет)" />
+                    android:inputType="textPassword" />
 
                 <EditText
                     android:id="@+id/about"
@@ -115,7 +107,8 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:onClick="reg"
+            android:text="Зарегистрироваться"/>
 
     </LinearLayout>
 

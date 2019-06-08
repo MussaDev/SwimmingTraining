@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import static android.widget.Toast.*;
 
 public class Registration extends AppCompatActivity implements ValueEventListener{
-    EditText email,password,familia,name,otchestvo,dr, login;
+    EditText email,password,familia,name,otchestvo,dr, login, stuge, about;
     Button registerButton,loginButton;
     //public static String rol1;
     FirebaseAuth firebaseAuth;
@@ -45,12 +45,14 @@ public class Registration extends AppCompatActivity implements ValueEventListene
         familia = (EditText) findViewById(R.id.familia);
         name = (EditText) findViewById(R.id.name);
         otchestvo = (EditText) findViewById(R.id.otchestvo);
-        email = (EditText) findViewById(R.id.dr);
+        email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.passw);
         dr = (EditText) findViewById(R.id.dr);
         registerButton = (Button) findViewById(R.id.reg);
         loginButton = (Button) findViewById(R.id.vhod);
         rol = findViewById(R.id.rol);
+        stuge = findViewById(R.id.stuge);
+        about = findViewById(R.id.about);
         login = (EditText) findViewById(R.id.login);
 
         FirebaseApp.initializeApp(this);
@@ -68,6 +70,8 @@ public class Registration extends AppCompatActivity implements ValueEventListene
         final String dr1 = dr.getText().toString();
         final String srol = rol.getSelectedItem().toString();
         final String login1 = login.getText().toString();
+        final String sstuge = stuge.getText().toString();
+        final String sabout = about.getText().toString();
 
         //Выделение синим цветом строк
         familia.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
@@ -76,6 +80,8 @@ public class Registration extends AppCompatActivity implements ValueEventListene
         email.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
         password.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
         dr.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+        stuge.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+        about.getBackground().mutate().setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
 
         //Проверка на заполненость данных пользователем
         if(TextUtils.isEmpty(familia1)){
@@ -108,6 +114,16 @@ public class Registration extends AppCompatActivity implements ValueEventListene
             makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля", LENGTH_SHORT).show();
             return;
         }
+        if(TextUtils.isEmpty(dr1)){
+            stuge.getBackground().mutate().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
+            makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля", LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(dr1)){
+            about.getBackground().mutate().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
+            makeText(getApplicationContext(),"Пожалуйста заполните необходимые поля", LENGTH_SHORT).show();
+            return;
+        }
 
         FirebaseDatabase mDatabaseReference = FirebaseDatabase.getInstance();
         final DatabaseReference mDatabaseReference1 = mDatabaseReference.getReference("users");
@@ -125,7 +141,7 @@ public class Registration extends AppCompatActivity implements ValueEventListene
 
                             {
                                 //внос данных в таблицу user -> бд
-                                Upload uploadSportsmanUser = new Upload(name1,familia1, otchestvo1, dr1, login1, email1, srol, "0");
+                                Upload uploadSportsmanUser = new Upload(name1,familia1, otchestvo1, dr1, login1, email1, srol, "0",sstuge,sabout);
                                 mDatabaseReference1.child(firebaseAuth.getUid()).setValue(uploadSportsmanUser);
                             } else {
                             }
