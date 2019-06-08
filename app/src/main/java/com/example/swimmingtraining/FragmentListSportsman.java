@@ -16,7 +16,7 @@ public class FragmentListSportsman extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_list_sportsman, container, false);
-        Intent intent = new Intent(getContext(),ZaprosTrainer.class);
+        Intent intent = new Intent(getContext(),ListSportsman.class);
         startActivity(intent);
         return view;
     }

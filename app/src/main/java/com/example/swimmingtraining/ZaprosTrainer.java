@@ -38,7 +38,7 @@ public class ZaprosTrainer extends AppCompatActivity {
         listViewListZapros = (ListView) findViewById(R.id.list_zapros);
         registerForContextMenu(listViewListZapros);
 
-//adding a clicklistener on listview
+//элементы списка
         listViewListZapros.setOnCreateContextMenuListener(new AdapterView.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
