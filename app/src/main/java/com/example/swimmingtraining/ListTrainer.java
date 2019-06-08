@@ -43,7 +43,7 @@ public class ListTrainer extends AppCompatActivity {
         listViewListTraineer = (ListView) findViewById(R.id.list_trainer);
         registerForContextMenu(listViewListTraineer);
 
-        //getting the database reference
+        //Подключение к бд
         DatabaseReference dbrol = FirebaseDatabase.getInstance().getReference("rol");
         DatabaseReference dbsportsman = dbrol.child("trainer");
 
