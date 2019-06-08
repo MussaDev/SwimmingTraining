@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutTrainer"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/aboutfamilia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/aboutname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/aboutotchestvo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/aboutemail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/aboutdr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/aboutstage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/aboutobout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="36sp" />
+</LinearLayout>
