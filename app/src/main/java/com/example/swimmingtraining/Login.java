@@ -117,7 +117,7 @@ public class Login extends AppCompatActivity {
 
 
     public void gost(View view) {
-        Intent intent = new Intent(Login.this, WhatchVideo.class);
+        Intent intent = new Intent(Login.this, GoustMenu.class);
         startActivity(intent);
     }
 
