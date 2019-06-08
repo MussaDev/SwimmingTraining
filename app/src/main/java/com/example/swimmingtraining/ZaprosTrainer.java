@@ -123,8 +123,7 @@ public class ZaprosTrainer extends AppCompatActivity {
                 DatabaseReference dbtrainer_sportsman_uid = dbtreainer_sportsman.child(part0); //ветка спортсмена у тренера
                 dbtrainer_sportsman_uid.setValue(uadd);
 
-                //чтение данных о пользователе
-                dbpart.addValueEventListener(new ValueEventListener() {
+                ValueEventListener eventListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         vname = dataSnapshot.child("name").getValue(String.class);
@@ -137,16 +136,22 @@ public class ZaprosTrainer extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.w("Failed to read value.", error.toException());
-                    }
-                });
+                    public void onCancelled(DatabaseError databaseError) {}
+                };
+                dbpart.addListenerForSingleValueEvent(eventListener);
+
+
 
                 //Запись UAdd в бд тренера
                 dbtrainer_sportsman_uid.setValue(uadd);
 
                 Toast.makeText(getApplicationContext(),"Выполнено",Toast.LENGTH_SHORT).show();
+
+                //Очтистка запроса
+                DatabaseReference dbsootv = FirebaseDatabase.getInstance().getReference("sootv");
+                DatabaseReference dbsootvuid = dbsootv.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                DatabaseReference dbsootvuidspotr = dbsootvuid.child(part0);
+                dbsootvuidspotr.setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
                 return true;
             case R.id.no:
                 //Очтистка запроса
