@@ -82,6 +82,7 @@ public class ListTrainerToGoust extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
         //Обработка нажатия на элемент listview
         listViewListTraineer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

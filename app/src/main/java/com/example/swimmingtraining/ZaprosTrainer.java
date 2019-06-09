@@ -1,5 +1,6 @@
 package com.example.swimmingtraining;
 
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ public class ZaprosTrainer extends AppCompatActivity {
     public String vemail;
     public String vraiting;
     public String part;
+    public String vstage;
+    public String vabout;
     List<UZapros> uzapros;
 
     DatabaseReference dbuserst = FirebaseDatabase.getInstance().getReference("users");
@@ -75,6 +78,59 @@ public class ZaprosTrainer extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+
+        //Обработка нажатия на элемент listview
+        listViewListZapros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> arg0,
+                                    View arg1, int position, long arg3)
+            {
+
+                //вычисление uid нажатого
+                String selectedFromList = (listViewListZapros.getItemAtPosition(position)).toString();
+                String[] parts = selectedFromList.split("\n");
+                String part0 = parts[0]; // UID книги
+
+                //переход по uid
+                DatabaseReference dbusers = FirebaseDatabase.getInstance().getReference("users");
+                DatabaseReference dbuser = dbusers.child(part0);
+
+                //чтение с БД
+                dbuser.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        vfamailia = dataSnapshot.child("famailia").getValue(String.class);
+                        vname = dataSnapshot.child("name").getValue(String.class);
+                        votchestvo = dataSnapshot.child("otchestvo").getValue(String.class);
+                        vemail = dataSnapshot.child("email").getValue(String.class);
+                        vdr = dataSnapshot.child("dr").getValue(String.class);
+                        vstage = dataSnapshot.child("stuge").getValue(String.class);
+                        vabout = dataSnapshot.child("about").getValue(String.class);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("Failed to read value.", error.toException());
+                    }
+                });
+
+                //Перелача данных в другое активити
+                Intent intent = new Intent(ZaprosTrainer.this, AboutTrainer.class);
+
+                // в ключи отправляем текст из первого текстового поля
+                intent.putExtra("pfamilia", vfamailia);
+                intent.putExtra("pname", vname);
+                intent.putExtra("potchestvo", votchestvo);
+                intent.putExtra("pemail", vemail);
+                intent.putExtra("pdr", vdr);
+                intent.putExtra("pstage", vstage);
+                intent.putExtra("pabout", vabout);
+
+                //запуск активити
+                startActivity(intent);
             }
         });
 
