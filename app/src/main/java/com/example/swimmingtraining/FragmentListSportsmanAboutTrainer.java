@@ -7,16 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-public class FragmentListSportsman extends Fragment {
+public class FragmentListSportsmanAboutTrainer extends Fragment {
     View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_list_sportsman, container, false);
-        Intent intent = new Intent(getContext(),ListSportsman.class);
+        view = inflater.inflate(R.layout.fragment_list, container, false);
+        Intent intent = new Intent(getContext(), ListSportsmanAboutTrainer.class);
         startActivity(intent);
         return view;
     }

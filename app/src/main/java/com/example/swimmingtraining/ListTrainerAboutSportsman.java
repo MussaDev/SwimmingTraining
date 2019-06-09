@@ -1,6 +1,5 @@
 package com.example.swimmingtraining;
 
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -22,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListSportsman extends AppCompatActivity {
+public class ListTrainerAboutSportsman extends AppCompatActivity {
     //the listview
     ListView listViewListSportsman;
     int position;
@@ -45,7 +44,7 @@ public class ListSportsman extends AppCompatActivity {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 
-                ListSportsman.super.onCreateContextMenu(menu, v, menuInfo);
+                ListTrainerAboutSportsman.super.onCreateContextMenu(menu, v, menuInfo);
                 MenuInflater inflater = getMenuInflater();
                 inflater.inflate(R.menu.context_menu, menu);
 

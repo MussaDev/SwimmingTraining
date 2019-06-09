@@ -1,7 +1,6 @@
 package com.example.swimmingtraining;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,10 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.widget.Toast.LENGTH_SHORT;
 import static android.widget.Toast.makeText;
 
-public class ListTrainer extends AppCompatActivity {
+public class ListSportsmanAboutTrainer extends AppCompatActivity {
     //the listview
     ListView listViewListTraineer;
     public int position;
@@ -84,7 +82,7 @@ public class ListTrainer extends AppCompatActivity {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 
-                ListTrainer.super.onCreateContextMenu(menu, v, menuInfo);
+                ListSportsmanAboutTrainer.super.onCreateContextMenu(menu, v, menuInfo);
                 MenuInflater inflater = getMenuInflater();
                 inflater.inflate(R.menu.context_menu_trainer, menu);
 
@@ -131,7 +129,7 @@ public class ListTrainer extends AppCompatActivity {
                 });
 
                 //Перелача данных в другое активити
-                Intent intent = new Intent(ListTrainer.this, AboutTrainer.class);
+                Intent intent = new Intent(ListSportsmanAboutTrainer.this, AboutTrainer.class);
 
                 // в ключ username пихаем текст из первого текстового поля
                 intent.putExtra("pfamilia", vfamilia);

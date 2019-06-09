@@ -16,8 +16,8 @@
         <activity android:name=".AdminPanel" />
         <activity android:name=".Admin_login" />
         <activity android:name=".WhatchVideo" />
-        <activity android:name=".ListTrainer" />
-        <activity android:name=".ListSportsman" />
+        <activity android:name=".ListSportsmanAboutTrainer" />
+        <activity android:name=".ListTrainerAboutSportsman" />
         <activity android:name=".Perepiska" />
         <activity
             android:name=".Main_sportsman"

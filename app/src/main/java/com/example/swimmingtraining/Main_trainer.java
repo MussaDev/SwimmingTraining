@@ -106,7 +106,7 @@ public class Main_trainer extends AppCompatActivity
 
         } else if (id == R.id.nav_list) {
             getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                    new FragmentListSportsman()).commit();
+                    new FragmentListTrainerAboutSportsman()).commit();
             navigationView.setCheckedItem(R.id.nav_list);
 
         } else if (id == R.id.nav_zapros) {
