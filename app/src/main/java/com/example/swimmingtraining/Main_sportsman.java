@@ -127,6 +127,11 @@ public class Main_sportsman extends AppCompatActivity
                     new FragmentBalance()).commit();
             navigationView.setCheckedItem(R.id.nav_balance);
 
+        } else if (id == R.id.push_video) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                    new FragmentPushVideo()).commit();
+            navigationView.setCheckedItem(R.id.push_video);
+
         } else if (id == R.id.video_sportsman) {
             getSupportFragmentManager().beginTransaction().replace(R.id.container,
                     new FragmentWhatchVideoTrainer()).commit();

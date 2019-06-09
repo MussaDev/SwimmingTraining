@@ -11,6 +11,9 @@
             android:id="@+id/nav_list"
             android:title="Список тренеров" />
         <item
+            android:id="@+id/push_video"
+            android:title="Загрузить видео" />
+        <item
             android:id="@+id/nav_balance"
             android:title="Баланс" />
         <item
