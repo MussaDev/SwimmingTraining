@@ -27,6 +27,7 @@ public class Upload {
         this.login = login;
         this.email = email;
         this.rol = rol;
+        this.raiting = raiting;
         this.stuge = stuge;
         this.about = about;
     }

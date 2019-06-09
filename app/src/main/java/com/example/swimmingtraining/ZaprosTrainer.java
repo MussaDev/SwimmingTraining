@@ -127,7 +127,7 @@ public class ZaprosTrainer extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         vname = dataSnapshot.child("name").getValue(String.class);
-                        vfamailia = dataSnapshot.child("familia").getValue(String.class);
+                        vfamailia = dataSnapshot.child("famailia").getValue(String.class);
                         votchestvo = dataSnapshot.child("otchestvo").getValue(String.class);
                         vdr = dataSnapshot.child("dr").getValue(String.class);
                         vlogin = dataSnapshot.child("login").getValue(String.class);
@@ -147,7 +147,7 @@ public class ZaprosTrainer extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"Выполнено",Toast.LENGTH_SHORT).show();
 
-                //Очтистка запроса
+                //запись в таблицу сообтветствия
                 DatabaseReference dbsootv = FirebaseDatabase.getInstance().getReference("sootv");
                 DatabaseReference dbsootvuid = dbsootv.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                 DatabaseReference dbsootvuidspotr = dbsootvuid.child(part0);

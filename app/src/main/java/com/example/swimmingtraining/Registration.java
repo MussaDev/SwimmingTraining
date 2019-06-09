@@ -159,7 +159,6 @@ public class Registration extends AppCompatActivity implements ValueEventListene
 
                                         //Запись спортсменов в БД
                                         mDatabaseReference1.child(firebaseAuth.getUid()).child("trainer").setValue(" ");
-                                        mDatabaseReference1.child("rating").setValue("0");
 
                                         //Запись в список спортсменов
                                         roli
@@ -185,7 +184,6 @@ public class Registration extends AppCompatActivity implements ValueEventListene
 
                                         //Поле спортсменов
                                         mDatabaseReference1.child(firebaseAuth.getUid()).child("sportsman").setValue(" ");
-                                        mDatabaseReference1.child("rating").setValue("0");
 
                                         //Запись в саисок тренеров
                                         roli

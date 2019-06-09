@@ -54,11 +54,11 @@ public class ListTrainerAboutSportsman extends AppCompatActivity {
         });
 
         //getting the database reference
-        DatabaseReference dbsootv = FirebaseDatabase.getInstance().getReference("sootv");
-        DatabaseReference dbuid = dbsootv.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        DatabaseReference dbusers = FirebaseDatabase.getInstance().getReference("users");
+        DatabaseReference dbdbuser = dbusers.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         //retrieving upload data from firebase database
-        dbuid.addValueEventListener(new ValueEventListener() {
+        dbdbuser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
