@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ListVideoTrainer"></activity>
         <activity android:name=".WhatchVideoToSsilka" />
-        <activity android:name=".AboutTrainer" />
+        <activity android:name=".AboutUser" />
         <activity android:name=".GoustMenu" />
         <activity android:name=".ListTrainerToGoust" />
         <activity android:name=".ZaprosTrainer" />

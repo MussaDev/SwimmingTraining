@@ -1,7 +1,6 @@
 package com.example.swimmingtraining;
 
 import android.content.Intent;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -118,7 +116,7 @@ public class ZaprosTrainer extends AppCompatActivity {
                 });
 
                 //Перелача данных в другое активити
-                Intent intent = new Intent(ZaprosTrainer.this, AboutTrainer.class);
+                Intent intent = new Intent(ZaprosTrainer.this, AboutUser.class);
 
                 // в ключи отправляем текст из первого текстового поля
                 intent.putExtra("pfamilia", vfamailia);

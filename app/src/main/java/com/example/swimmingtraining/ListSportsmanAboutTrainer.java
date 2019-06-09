@@ -129,7 +129,7 @@ public class ListSportsmanAboutTrainer extends AppCompatActivity {
                 });
 
                 //Перелача данных в другое активити
-                Intent intent = new Intent(ListSportsmanAboutTrainer.this, AboutTrainer.class);
+                Intent intent = new Intent(ListSportsmanAboutTrainer.this, AboutUser.class);
 
                 // в ключ username пихаем текст из первого текстового поля
                 intent.putExtra("pfamilia", vfamilia);
