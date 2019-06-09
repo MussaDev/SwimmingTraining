@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/mainico_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WhatchVideoToSsilka"></activity>
+        <activity android:name=".ListVideoTrainer"></activity>
+        <activity android:name=".WhatchVideoToSsilka" />
         <activity android:name=".AboutTrainer" />
         <activity android:name=".GoustMenu" />
         <activity android:name=".ListTrainerToGoust" />
