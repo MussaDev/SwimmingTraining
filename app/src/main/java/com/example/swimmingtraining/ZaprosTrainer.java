@@ -36,6 +36,7 @@ public class ZaprosTrainer extends AppCompatActivity {
     public String vlogin;
     public String vemail;
     public String vraiting;
+    public String part;
     List<UZapros> uzapros;
 
     DatabaseReference dbuserst = FirebaseDatabase.getInstance().getReference("users");
@@ -104,12 +105,7 @@ public class ZaprosTrainer extends AppCompatActivity {
                 //Получение uid пользователя
                 String selectedFromList = (listViewListZapros.getItemAtPosition(position)).toString();
                 String[] parts = selectedFromList.split("\n");
-                String part0 = parts[0];
-
-                //Очтистка запроса
-                DatabaseReference dbzapros = FirebaseDatabase.getInstance().getReference("Zapros");
-                DatabaseReference dbuid = dbzapros.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                dbuid.setValue(" ");
+                final String part0 = parts[0];
 
                 //Поиск пользователя по uid в БД
                 DatabaseReference dbpart = dbuserst.child(part0);
@@ -124,21 +120,28 @@ public class ZaprosTrainer extends AppCompatActivity {
                         vlogin = dataSnapshot.child("login").getValue(String.class);
                         vemail = dataSnapshot.child("email").getValue(String.class);
                         vraiting = dataSnapshot.child("rating").getValue(String.class);
+                        part = part0;
                     }
 
                     @Override
+                    
                     public void onCancelled(DatabaseError databaseError) {}
                 };
                 dbpart.addListenerForSingleValueEvent(eventListener);
 
                 //запись данных в UAdd
-                UAdd uadd = new UAdd(vname,vfamailia, votchestvo, vdr, vlogin, vemail, vraiting);
+                UAdd uadd = new UAdd(vname,vfamailia, votchestvo, vdr, vlogin, vemail, vraiting, part);
 
                 //Запись UAdd в бд тренера
                 DatabaseReference dbuidtr = dbuserst.child(FirebaseAuth.getInstance().getCurrentUser().getUid()); //ветка тренера
                 DatabaseReference dbtreainer_sportsman = dbuidtr.child("sportsman"); //ветка спортсменов у тренера
                 DatabaseReference dbtrainer_sportsman_uid = dbtreainer_sportsman.child(part0); //ветка спортсмена у тренера
                 dbtrainer_sportsman_uid.setValue(uadd);
+
+                //Очтистка запроса
+                DatabaseReference dbzapros = FirebaseDatabase.getInstance().getReference("Zapros");
+                DatabaseReference dbuid = dbzapros.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                dbuid.setValue(" ");
 
                 Toast.makeText(getApplicationContext(),"Выполнено",Toast.LENGTH_SHORT).show();
 
