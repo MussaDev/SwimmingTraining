@@ -114,15 +114,6 @@ public class ZaprosTrainer extends AppCompatActivity {
                 //Поиск пользователя по uid в БД
                 DatabaseReference dbpart = dbuserst.child(part0);
 
-                //запись данных в UAdd
-                UAdd uadd = new UAdd(vname,vfamailia, votchestvo, vdr, vlogin, vemail, vraiting);
-
-                //Запись UAdd в бд тренера
-                DatabaseReference dbuidtr = dbuserst.child(FirebaseAuth.getInstance().getCurrentUser().getUid()); //ветка тренера
-                DatabaseReference dbtreainer_sportsman = dbuidtr.child("sportsman"); //ветка спортсменов у тренера
-                DatabaseReference dbtrainer_sportsman_uid = dbtreainer_sportsman.child(part0); //ветка спортсмена у тренера
-                dbtrainer_sportsman_uid.setValue(uadd);
-
                 ValueEventListener eventListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -140,9 +131,13 @@ public class ZaprosTrainer extends AppCompatActivity {
                 };
                 dbpart.addListenerForSingleValueEvent(eventListener);
 
-
+                //запись данных в UAdd
+                UAdd uadd = new UAdd(vname,vfamailia, votchestvo, vdr, vlogin, vemail, vraiting);
 
                 //Запись UAdd в бд тренера
+                DatabaseReference dbuidtr = dbuserst.child(FirebaseAuth.getInstance().getCurrentUser().getUid()); //ветка тренера
+                DatabaseReference dbtreainer_sportsman = dbuidtr.child("sportsman"); //ветка спортсменов у тренера
+                DatabaseReference dbtrainer_sportsman_uid = dbtreainer_sportsman.child(part0); //ветка спортсмена у тренера
                 dbtrainer_sportsman_uid.setValue(uadd);
 
                 Toast.makeText(getApplicationContext(),"Выполнено",Toast.LENGTH_SHORT).show();
