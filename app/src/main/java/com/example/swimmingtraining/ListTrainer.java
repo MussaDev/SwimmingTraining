@@ -1,8 +1,10 @@
 package com.example.swimmingtraining;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,9 +31,13 @@ public class ListTrainer extends AppCompatActivity {
     //the listview
     ListView listViewListTraineer;
     public int position;
-    //database reference to get uploads data
-    DatabaseReference dbrol;
-
+    public String vfamilia;
+    public String vname;
+    public String votchestvo;
+    public String valueemail;
+    public String vdr;
+    public String vstage;
+    public String vabout;
     FirebaseAuth firebaseAuth;
     //list to store uploads data
     List<UList> ulist;
@@ -86,6 +92,58 @@ public class ListTrainer extends AppCompatActivity {
                 position = info.position;
 
 
+            }
+        });
+        //Обработка нажатия на элемент listview
+        listViewListTraineer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> arg0,
+                                    View arg1, int position, long arg3)
+            {
+
+                //вычисление uid нажатого
+                String selectedFromList = (listViewListTraineer.getItemAtPosition(position)).toString();
+                String[] parts = selectedFromList.split("\n");
+                String part1 = parts[1]; // UID книги
+
+                //переход по uid
+                DatabaseReference dbusers = FirebaseDatabase.getInstance().getReference("users");
+                DatabaseReference dbuser = dbusers.child(part1);
+
+                //чтение с БД
+                dbuser.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        vfamilia = dataSnapshot.child("famailia").getValue(String.class);
+                        vname = dataSnapshot.child("name").getValue(String.class);
+                        votchestvo = dataSnapshot.child("otchestvo").getValue(String.class);
+                        valueemail = dataSnapshot.child("email").getValue(String.class);
+                        vdr = dataSnapshot.child("dr").getValue(String.class);
+                        vstage = dataSnapshot.child("stuge").getValue(String.class);
+                        vabout = dataSnapshot.child("about").getValue(String.class);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("Failed to read value.", error.toException());
+                    }
+                });
+
+                //Перелача данных в другое активити
+                Intent intent = new Intent(ListTrainer.this, AboutTrainer.class);
+
+                // в ключ username пихаем текст из первого текстового поля
+                intent.putExtra("pfamilia", vfamilia);
+                intent.putExtra("pname", vname);
+                intent.putExtra("potchestvo", votchestvo);
+                intent.putExtra("pemail", valueemail);
+                intent.putExtra("pdr", vdr);
+                intent.putExtra("pstage", vstage);
+                intent.putExtra("pabout", vabout);
+
+                //запуск активити
+                startActivity(intent);
             }
         });
     }
