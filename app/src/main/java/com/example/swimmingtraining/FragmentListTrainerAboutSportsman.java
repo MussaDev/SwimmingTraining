@@ -15,7 +15,7 @@ public class FragmentListTrainerAboutSportsman extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_list_sportsman, container, false);
-        Intent intent = new Intent(getContext(), ListTrainerAboutSportsman.class);
+        Intent intent = new Intent(getContext(), WhatchVideoToSsilka.class);
         startActivity(intent);
         return view;
     }
