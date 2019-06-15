@@ -8,23 +8,27 @@
     tools:context=".PushVideo">
 
     <VideoView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
         android:id="@+id/vv"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
-    <VideoView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:id="@+id/vv2"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_width="387dp"
+        android:layout_height="249dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/btn"
+        android:layout_width="397dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Select Multiple Videos From Gallery"/>
+        android:gravity="center"
+        android:text="Выбрать видео для загрузки" />
+
+    <Button
+        android:id="@+id/push"
+        android:layout_width="397dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Загрузить"
+        android:onClick="push"/>
 
 </LinearLayout>

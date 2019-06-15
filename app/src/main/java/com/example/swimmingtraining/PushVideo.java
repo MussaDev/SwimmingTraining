@@ -1,6 +1,7 @@
 package com.example.swimmingtraining;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ContentUris;
 import android.content.Context;
@@ -11,25 +12,40 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 import android.widget.VideoView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class PushVideo extends AppCompatActivity {
 
-    private VideoView videoView, videoView2;
+
+    private VideoView videoView;
     private Button btn;
     private static final String TAG = "VideoPickerActivity";
-
     private static final int SELECT_VIDEOS = 1;
     private static final int SELECT_VIDEOS_KITKAT = 1;
-
     private List<String> selectedVideos;
+    public String filePath;
+    public Uri videoURI;
+
+    FirebaseStorage storage;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +54,7 @@ public class PushVideo extends AppCompatActivity {
 
         btn = (Button) findViewById(R.id.btn);
         videoView = (VideoView) findViewById(R.id.vv);
-        videoView2 = (VideoView) findViewById(R.id.vv2);
+
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,12 +85,6 @@ public class PushVideo extends AppCompatActivity {
             videoView.setVideoPath(selectedVideos.get(0));
             videoView.requestFocus();
             videoView.start();
-
-            if(selectedVideos.size() > 1) {
-                videoView2.setVideoPath(selectedVideos.get(1));
-                videoView2.requestFocus();
-                videoView2.start();
-            }
         }
 
     }
@@ -87,14 +97,14 @@ public class PushVideo extends AppCompatActivity {
         if(clipData != null) {
             for(int i=0;i<clipData.getItemCount();i++) {
                 ClipData.Item videoItem = clipData.getItemAt(i);
-                Uri videoURI = videoItem.getUri();
+                videoURI = data.getData();
                 String filePath = getPath(this, videoURI);
                 result.add(filePath);
             }
         }
         else {
-            Uri videoURI = data.getData();
-            String filePath = getPath(this, videoURI);
+            videoURI = data.getData();
+            filePath = getPath(this, videoURI);
             result.add(filePath);
         }
 
@@ -223,5 +233,42 @@ public class PushVideo extends AppCompatActivity {
      */
     public static boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+    }
+
+    //загрузка видео в firebase
+    public void push(View view) {
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        if(filePath != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            ref.putFile(videoURI)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(PushVideo.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(PushVideo.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        }
+                    });
+        }
     }
 }
