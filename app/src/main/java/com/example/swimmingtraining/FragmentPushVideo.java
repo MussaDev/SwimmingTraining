@@ -9,12 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class FragmentPushVideo extends Fragment {
+
     View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_push_video, container, false);
+        view = inflater.inflate(R.layout.fragment_list, container, false);
         Intent intent = new Intent(getContext(), PushVideo.class);
         startActivity(intent);
         return view;
