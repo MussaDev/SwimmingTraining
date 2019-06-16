@@ -197,13 +197,18 @@ public class ZaprosTrainer extends AppCompatActivity {
                 DatabaseReference dbuid = dbzapros.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                 dbuid.setValue(" ");
 
-                Toast.makeText(getApplicationContext(),"Выполнено",Toast.LENGTH_SHORT).show();
-
-                //запись в таблицу сообтветствия
+                //запись в таблицу сообтветствия тренера
                 DatabaseReference dbsootv = FirebaseDatabase.getInstance().getReference("sootv");
-                DatabaseReference dbsootvuid = dbsootv.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                DatabaseReference dbsootvuidspotr = dbsootvuid.child(part0);
-                dbsootvuidspotr.setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                DatabaseReference dbsootvtrainer = dbsootv.child("sootv_trainer");
+                DatabaseReference dbsootvuidtrainer = dbsootvtrainer.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                dbsootvuidtrainer.push().setValue(part0);
+
+                //запись в таблицу сообтветствия спортсмена
+                DatabaseReference dbsootvsportsman = dbsootv.child("sootv_sportsman");
+                DatabaseReference dbsootvuid = dbsootvsportsman.child(part0);
+                dbsootvuid.setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+                Toast.makeText(getApplicationContext(),"Выполнено",Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.no:
                 //Очтистка запроса
