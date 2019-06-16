@@ -23,6 +23,8 @@ import android.widget.VideoView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -46,6 +48,9 @@ public class PushVideo extends AppCompatActivity {
 
     FirebaseStorage storage;
     StorageReference storageReference;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference dbzag = database.getReference("zagr");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -245,12 +250,23 @@ public class PushVideo extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            final StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
             ref.putFile(videoURI)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
+                            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    // Получение url загруженного видео
+                                    Uri downloadUrl = uri;
+                                    String fileUrl = downloadUrl.toString();
+
+                                    //Запись url в БД
+                                    dbzag.child("video").setValue(fileUrl);
+                                }
+                            });
                             Toast.makeText(PushVideo.this, "Uploaded", Toast.LENGTH_SHORT).show();
                         }
                     })
