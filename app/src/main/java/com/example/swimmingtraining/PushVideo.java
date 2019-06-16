@@ -13,18 +13,25 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -36,21 +43,22 @@ import java.util.UUID;
 
 public class PushVideo extends AppCompatActivity {
 
-
+    EditText dv, e_name_video;
     private VideoView videoView;
     private Button btn;
     private static final String TAG = "VideoPickerActivity";
     private static final int SELECT_VIDEOS = 1;
     private static final int SELECT_VIDEOS_KITKAT = 1;
     private List<String> selectedVideos;
-    public String filePath;
+    public String filePath, uid_trainer;
     public Uri videoURI;
 
     FirebaseStorage storage;
     StorageReference storageReference;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference dbzag = database.getReference("zagr");
+    DatabaseReference dbzag = database.getReference("zag_video");
+    DatabaseReference dbsootv = database.getReference("sootv");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -261,10 +269,43 @@ public class PushVideo extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     // Получение url загруженного видео
                                     Uri downloadUrl = uri;
-                                    String fileUrl = downloadUrl.toString();
+                                    final String fileUrl = downloadUrl.toString();
 
-                                    //Запись url в БД
-                                    dbzag.child("video").setValue(fileUrl);
+                                    //Объявление компонентов GUI
+                                    dv = (EditText) findViewById(R.id.data_video);
+                                    e_name_video = (EditText) findViewById(R.id.name_video);
+
+                                    //Перенос данных в строковые значения
+                                    final String s_dv = dv.getText().toString();
+                                    final String s_name_video = e_name_video.getText().toString();
+
+                                    //Получение uid  тренера
+                                    DatabaseReference dbsootv_trainer = dbsootv.child("sootv_sportsman");
+                                    dbsootv_trainer.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            uid_trainer = dataSnapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue(String.class);
+
+                                            //Запись url в БД
+                                            String uid_author = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                            UVideoTrainer uvideotreainer = new UVideoTrainer(s_dv, uid_author, s_name_video, fileUrl);
+                                            FirebaseDatabase.getInstance()
+                                                    .getReference()
+                                                    .child("zagvideo")
+                                                    .child(uid_trainer)
+                                                    .push()
+                                                    .setValue(uvideotreainer);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError error) {
+                                            // Failed to read value
+                                            Log.w("Failed to read value.", error.toException());
+                                        }
+                                    });
+
+
+
                                 }
                             });
                             Toast.makeText(PushVideo.this, "Uploaded", Toast.LENGTH_SHORT).show();

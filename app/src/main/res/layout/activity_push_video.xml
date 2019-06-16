@@ -22,6 +22,22 @@
         android:gravity="center"
         android:text="Выбрать видео для загрузки" />
 
+    <EditText
+        android:id="@+id/name_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Имя видео" />
+
+    <EditText
+        android:id="@+id/data_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:hint="Дата съемки видео"/>
+
     <Button
         android:id="@+id/push"
         android:layout_width="397dp"
