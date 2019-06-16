@@ -114,6 +114,11 @@ public class Main_trainer extends AppCompatActivity
                     new FragmentZapros()).commit();
             navigationView.setCheckedItem(R.id.nav_zapros);
 
+        } else if (id == R.id.video_sportsman) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                    new FragmentVideoSportsman()).commit();
+            navigationView.setCheckedItem(R.id.nav_zapros);
+
         }else if (id == R.id.nav_balance) {
             getSupportFragmentManager().beginTransaction().replace(R.id.container,
                     new FragmentBalance()).commit();
