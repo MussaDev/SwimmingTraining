@@ -20,9 +20,7 @@ public class UVideoTrainer {
         this.url = url;
     }
 
-    public String getData_video() {
-        return data_video;
-    }
+    public String getData_video() { return data_video; }
     public String getAuthor() {
         return author;
     }

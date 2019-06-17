@@ -14,7 +14,7 @@ public class FragmentVideoSportsman extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_message_sportsman, container, false);
-        Intent intent = new Intent(getContext(),Perepiska.class);
+        Intent intent = new Intent(getContext(),VideoSportsman.class);
         startActivity(intent);
         return view;
     }
